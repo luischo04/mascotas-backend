@@ -14,7 +14,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     }
 
     const {cveUsuario, username, mascota} = jwtPayLoad;
-    const newToken = jwt.sign({cveUsuario, username, mascota}, secretKey.jwtSecret, {expiresIn : '1h'});
+    const newToken = jwt.sign({cveUsuario, username}, secretKey.jwtSecret, {expiresIn : '1h'});
     res.setHeader('token', newToken);
     next();
 }

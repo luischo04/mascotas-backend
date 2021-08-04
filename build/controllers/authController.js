@@ -36,8 +36,8 @@ class AuthController {
             }
             for (let user of users) {
                 if (yield utils_1.utils.checkPassword(password, user.password)) {
-                    const token = jsonwebtoken_1.default.sign({ cveUsuario: user.cveUsuario, username, mascota: user.nombreMascota }, jwtKey_1.default.jwtSecret, { expiresIn: '1h' });
-                    return res.json({ message: "OK", token, cveUsuario: user.cveUsuario, username, mascota: user.nombreMascota, nombre: user.nombre, apellidos: user.apellidos, raza: user.nomRaza, descripcion: user.descripcion });
+                    const token = jsonwebtoken_1.default.sign({ cveUsuario: user.cveUsuario, username }, jwtKey_1.default.jwtSecret, { expiresIn: '1h' });
+                    return res.json({ message: "OK", token, cveUsuario: user.cveUsuario, username, nombre: user.nombre, apellidos: user.apellidos });
                 }
                 else {
                     return res.status(400).json({ message: "La contraseña es incorrecta" });

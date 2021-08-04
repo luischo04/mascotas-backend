@@ -18,7 +18,7 @@ class AuthDAO {
     getUser(usuario) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query('SELECT * FROM usuario JOIN mascota ON usuario.cveUsuario = mascota.cvePropietario JOIN razas ON mascota.raza = razas.idRaza WHERE username = ?', [usuario]);
+                return yield connection.query('SELECT * FROM usuario WHERE username = ?', [usuario]);
             }));
             return result;
         });
