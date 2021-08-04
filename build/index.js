@@ -10,6 +10,7 @@ const cors_1 = __importDefault(require("cors"));
 const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const mascotasRoutes_1 = __importDefault(require("./routes/mascotasRoutes"));
+const generalRoutes_1 = __importDefault(require("./routes/generalRoutes"));
 class Server {
     // Constructor de nuestro servidor
     constructor() {
@@ -30,6 +31,7 @@ class Server {
         this.app.use('/usuario', usuarioRoutes_1.default);
         this.app.use('/auth', authRoutes_1.default);
         this.app.use('/mascota', mascotasRoutes_1.default);
+        this.app.use('/general', generalRoutes_1.default);
     }
     // Inicialización del servidor
     start() {
