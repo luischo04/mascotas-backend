@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+// routes
+const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
+const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 class Server {
     // Constructor de nuestro servidor
     constructor() {
@@ -22,7 +25,10 @@ class Server {
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
     // Rutas para mi APIRest
-    routes() { }
+    routes() {
+        this.app.use('/usuario', usuarioRoutes_1.default);
+        this.app.use('/auth', authRoutes_1.default);
+    }
     // Inicialización del servidor
     start() {
         this.app.listen(this.app.get('port'), () => {
