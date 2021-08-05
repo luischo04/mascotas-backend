@@ -27,7 +27,7 @@ class MascotaDao {
 
     public async update(mascota: any) {
         const result = await pool.then(async (connection) => {
-            return await connection.query("UPDATE mascota SET ?", [mascota]);
+            return await connection.query("UPDATE mascota SET ? WHERE cveMascota = ?", [mascota, mascota.cveMascota]);
         });
         return result;
         

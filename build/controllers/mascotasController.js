@@ -49,5 +49,25 @@ class MascotasController {
             }
         });
     }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const mascota = req.body;
+                if (mascota.cveMascota == null) {
+                    return res.status(400).json({ meesage: "No se puede actualizar" });
+                }
+                const result = yield mascotasDao_1.daoMascotas.update(mascota);
+                if (result.affectedRows > 0) {
+                    return res.json({ meesage: "Actualizado correctamente" });
+                }
+                else {
+                    return res.status(400).json({ meesage: result.message });
+                }
+            }
+            catch (ex) {
+                res.status(500).json({ message: ex.message });
+            }
+        });
+    }
 }
 exports.mascotaController = new MascotasController();

@@ -39,6 +39,27 @@ class MascotasController {
             res.status(500).json({ message: ex.message });
         }
     }
+
+    public async update (req:  Request, res: Response){
+        try {
+            const mascota = req.body;
+
+            if(mascota.cveMascota == null){
+                return res.status(400).json({ meesage : "No se puede actualizar" });
+            }
+
+            const result = await daoMascotas.update(mascota);
+
+            if(result.affectedRows > 0){
+                return res.json({ meesage : "Actualizado correctamente" });
+            } else  {
+                return res.status(400).json({ meesage : result.message });
+            }
+
+        } catch (ex) {
+            res.status(500).json({ message: ex.message });
+        }
+    }
 }
 
 

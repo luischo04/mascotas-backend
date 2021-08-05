@@ -39,5 +39,13 @@ class MascotaDao {
             return result;
         });
     }
+    update(mascota) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query("UPDATE mascota SET ? WHERE cveMascota = ?", [mascota, mascota.cveMascota]);
+            }));
+            return result;
+        });
+    }
 }
 exports.daoMascotas = new MascotaDao();

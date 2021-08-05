@@ -11,8 +11,9 @@ class MascotasRoutes {
     }
 
     config(): void {
-        this.router.get('/', [checkJwt], mascotaController.lista);
+        this.router.get('/', /*[checkJwt],*/ mascotaController.lista);
         this.router.put('/', /*[checkJwt],*/ mascotaController.insert);
+        this.router.post('/', /*[checkJwt],*/ mascotaController.update);
         
     }
 
