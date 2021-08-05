@@ -10,6 +10,22 @@ class MascotasController {
             res.status(500).json({ message: error.message });
         }
     }
+
+    public async listaByUsuario(req: Request, res: Response) {
+        try {
+            const { cveUsuario } = req.params;
+
+            if(cveUsuario == null){
+                return res.status(400).json({ message : "No se puede eliminar" });
+            }
+
+            const result = await daoMascotas.listaByUsuario(parseInt(cveUsuario));
+            res.json(result);
+            
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
     
     public async insert (req: Request, res: Response) {
         try {
@@ -60,6 +76,27 @@ class MascotasController {
             res.status(500).json({ message: ex.message });
         }
     }
+
+    public async delete(req: Request, res: Response){
+        try {
+            const { cveMascota } = req.params;
+
+            if(cveMascota == null){
+                return res.status(400).json({ message : "No se puede eliminar" });
+            }
+
+            const result = await daoMascotas.delete(parseInt(cveMascota));
+
+            if(result.affectedRows > 0){
+                res.json({ message : "Borrado exitosamente" })
+            } else  {
+                res.status(400).json({ message : result.message });
+            }
+        } catch (error) {
+            res.status(400).json({ message : error.message });
+        }
+    }
+
 }
 
 

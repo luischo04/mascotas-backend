@@ -1,9 +1,9 @@
 import pool from "../database/database";
 
 class MascotaDao {
-    public async listaByUsuario(username: string) {
+    public async listaByUsuario(cveUsuario: number) {
         const result  = await pool.then(async (connection) => {
-            return await connection.query("SELECT cveUsuario, nombre, apellidos, username, cveMascota, nombreMascota, fechaAdopcion, raza, idRaza, nomRaza, descripcion  FROM usuario JOIN mascota ON usuario.cveUsuario = mascota.cvePropietario JOIN razas ON mascota.raza = razas.idRaza WHERE usuario.username = ?", [username]);
+            return await connection.query("SELECT cveUsuario, nombre, apellidos, username, cveMascota, nombreMascota, fechaAdopcion, raza, idRaza, nomRaza, descripcion  FROM usuario JOIN mascota ON usuario.cveUsuario = mascota.cvePropietario JOIN razas ON mascota.raza = razas.idRaza WHERE cvePropietario = ?", [cveUsuario]);
         });
 
         return result;
@@ -31,6 +31,14 @@ class MascotaDao {
         });
         return result;
         
+    }
+
+    public async delete(cveMascota: number) {
+        const result = await pool.then(async (connection) => {
+            return await connection.query("DELETE FROM mascota WHERE cveMascota = ?", [cveMascota]);
+        });
+
+        return result;
     }
 
 }

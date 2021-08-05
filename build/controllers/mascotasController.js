@@ -23,6 +23,21 @@ class MascotasController {
             }
         });
     }
+    listaByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { cveUsuario } = req.params;
+                if (cveUsuario == null) {
+                    return res.status(400).json({ message: "No se puede eliminar" });
+                }
+                const result = yield mascotasDao_1.daoMascotas.listaByUsuario(parseInt(cveUsuario));
+                res.json(result);
+            }
+            catch (error) {
+                res.status(500).json({ message: error.message });
+            }
+        });
+    }
     insert(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -66,6 +81,26 @@ class MascotasController {
             }
             catch (ex) {
                 res.status(500).json({ message: ex.message });
+            }
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { cveMascota } = req.params;
+                if (cveMascota == null) {
+                    return res.status(400).json({ message: "No se puede eliminar" });
+                }
+                const result = yield mascotasDao_1.daoMascotas.delete(parseInt(cveMascota));
+                if (result.affectedRows > 0) {
+                    res.json({ message: "Borrado exitosamente" });
+                }
+                else {
+                    res.status(400).json({ message: result.message });
+                }
+            }
+            catch (error) {
+                res.status(400).json({ message: error.message });
             }
         });
     }
