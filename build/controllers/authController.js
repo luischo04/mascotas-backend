@@ -16,6 +16,7 @@ exports.authController = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const jwtKey_1 = __importDefault(require("../config/jwtKey"));
 const authDao_1 = require("../dao/authDao");
+const mascotasDao_1 = require("../dao/mascotasDao");
 const utils_1 = require("../utils/utils");
 class AuthController {
     /**
@@ -30,14 +31,25 @@ class AuthController {
                 return res.status(400).json({ message: "Usuario y contraseña  incorrecta" });
             }
             const users = yield authDao_1.dao.getUser(username);
+            const mascotas = yield mascotasDao_1.daoMascotas.listaByUsuario(username);
             // Verificar si existe el usuario
             if (users.length <= 0) {
                 return res.status(400).json({ message: "El usuario no existe" });
             }
+            // for(let user of users) {
+            //     if(await utils.checkPassword(password, user.password)){
+            //         const token = jwt.sign({cveUsuario : user.cveUsuario, username}, secretKey.jwtSecret, {expiresIn : '1h'});
+            //         return res.json({ message : "OK", token, cveUsuario : user.cveUsuario, username,  nombre: user.nombre, apellidos: user.apellidos });
+            //     } else {
+            //         return res.status(400).json({message : "La contraseña es incorrecta"});
+            //     }
+            // }
             for (let user of users) {
                 if (yield utils_1.utils.checkPassword(password, user.password)) {
-                    const token = jsonwebtoken_1.default.sign({ cveUsuario: user.cveUsuario, username }, jwtKey_1.default.jwtSecret, { expiresIn: '1h' });
-                    return res.json({ message: "OK", token, cveUsuario: user.cveUsuario, username, nombre: user.nombre, apellidos: user.apellidos });
+                    for (let mascota of mascotas) {
+                        const token = jsonwebtoken_1.default.sign({ cveUsuario: user.cveUsuario, username }, jwtKey_1.default.jwtSecret, { expiresIn: '1h' });
+                        return res.json({ message: "OK", token, cveUsuario: user.cveUsuario, username, nombre: user.nombre, apellidos: user.apellidos, nombreMascota: mascota.nombreMascota, nomRaza: mascota.nomRaza, descripcion: mascota.descripcion });
+                    }
                 }
                 else {
                     return res.status(400).json({ message: "La contraseña es incorrecta" });

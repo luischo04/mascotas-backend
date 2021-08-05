@@ -15,7 +15,7 @@ class MascotasController {
     lista(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield mascotasDao_1.dao.lista();
+                const result = yield mascotasDao_1.daoMascotas.lista();
                 res.json(result);
             }
             catch (error) {
