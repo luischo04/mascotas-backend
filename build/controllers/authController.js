@@ -48,21 +48,6 @@ class AuthController {
                     return res.status(400).json({ message: "La contraseña es incorrecta" });
                 }
             }
-            // for (let user of users) {
-            //     if (await utils.checkPassword(password, user.password)) {
-            //         for (let mascota of mascotas) {
-            //             if(mascota == null){
-            //                 const token = jwt.sign({ cveUsuario: user.cveUsuario, username }, secretKey.jwtSecret, { expiresIn: '1h' });
-            //             return res.json({ message: "OK", token, cveUsuario: user.cveUsuario, username, nombre: user.nombre, apellidos: user.apellidos });
-            //             } else {
-            //                 const token = jwt.sign({ cveUsuario: user.cveUsuario, username }, secretKey.jwtSecret, { expiresIn: '1h' });
-            //             return res.json({ message: "OK", token, cveUsuario: user.cveUsuario, username, nombre: user.nombre, apellidos: user.apellidos, nombreMascota: mascota.nombreMascota, nomRaza: mascota.nomRaza, descripcion: mascota.descripcion });
-            //             }
-            //         }
-            //     } else {
-            //         return res.status(400).json({ message: "La contraseña es incorrecta" });
-            //     }
-            // }
         });
     }
 }

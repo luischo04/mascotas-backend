@@ -8,11 +8,11 @@ class MascotasRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', /*[checkJwt],*/ mascotasController_1.mascotaController.lista);
-        this.router.get('/listaByUsuario/:username', /*[checkJwt],*/ mascotasController_1.mascotaController.listaByUsuario);
-        this.router.put('/', /*[checkJwt],*/ mascotasController_1.mascotaController.insert);
-        this.router.post('/', /*[checkJwt],*/ mascotasController_1.mascotaController.update);
-        this.router.delete('/:cveMascota' /*, [checkJwt]*/, mascotasController_1.mascotaController.delete);
+        this.router.get('/', mascotasController_1.mascotaController.lista);
+        this.router.get('/listaByUsuario/:username', mascotasController_1.mascotaController.listaByUsuario);
+        this.router.put('/', mascotasController_1.mascotaController.insert);
+        this.router.post('/', mascotasController_1.mascotaController.update);
+        this.router.delete('/:cveMascota', mascotasController_1.mascotaController.delete);
     }
 }
 const mascotaRoutes = new MascotasRoutes();
