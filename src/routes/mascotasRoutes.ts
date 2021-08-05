@@ -12,7 +12,7 @@ class MascotasRoutes {
 
     config(): void {
         this.router.get('/', /*[checkJwt],*/ mascotaController.lista);
-        this.router.get('/listaByUsuario:cveUsuario', /*[checkJwt],*/ mascotaController.listaByUsuario);
+        this.router.get('/listaByUsuario/:username', /*[checkJwt],*/ mascotaController.listaByUsuario);
         this.router.put('/', /*[checkJwt],*/ mascotaController.insert);
         this.router.post('/', /*[checkJwt],*/ mascotaController.update);
         this.router.delete('/:cveMascota'/*, [checkJwt]*/, mascotaController.delete)

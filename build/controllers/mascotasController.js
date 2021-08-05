@@ -26,11 +26,11 @@ class MascotasController {
     listaByUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { cveUsuario } = req.params;
-                if (cveUsuario == null) {
+                const { username } = req.params;
+                if (username == null) {
                     return res.status(400).json({ message: "No se puede eliminar" });
                 }
-                const result = yield mascotasDao_1.daoMascotas.listaByUsuario(parseInt(cveUsuario));
+                const result = yield mascotasDao_1.daoMascotas.listaByUsuario(username);
                 res.json(result);
             }
             catch (error) {
