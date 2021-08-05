@@ -16,6 +16,23 @@ class MascotaDao {
 
         return result;
     }
+
+    public async insert(mascota: any) {
+        const result = await pool.then(async (connection) => {
+            return await connection.query("INSERT INTO mascota SET ?", [mascota]);
+        });
+        return result;
+        
+    }
+
+    public async update(mascota: any) {
+        const result = await pool.then(async (connection) => {
+            return await connection.query("UPDATE mascota SET ?", [mascota]);
+        });
+        return result;
+        
+    }
+
 }
 
 export const daoMascotas = new MascotaDao();

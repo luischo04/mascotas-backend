@@ -23,5 +23,31 @@ class MascotasController {
             }
         });
     }
+    insert(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { nombreMascota, fechaAdopcion, cvePropietario, raza } = req.body;
+                if (nombreMascota == null || fechaAdopcion == null || cvePropietario == null || raza == null) {
+                    return res.status(400).json({ meesage: "Los datos son requeridos" });
+                }
+                const mascota = {
+                    nombreMascota,
+                    fechaAdopcion,
+                    cvePropietario,
+                    raza,
+                };
+                const result = yield mascotasDao_1.daoMascotas.insert(mascota);
+                if (result.affectedRows > 0) {
+                    return res.json({ meesage: "Registro exitoso" });
+                }
+                else {
+                    return res.status(400).json({ meesage: result.message });
+                }
+            }
+            catch (ex) {
+                res.status(500).json({ message: ex.message });
+            }
+        });
+    }
 }
 exports.mascotaController = new MascotasController();

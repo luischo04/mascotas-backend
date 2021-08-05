@@ -16,7 +16,6 @@ exports.authController = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const jwtKey_1 = __importDefault(require("../config/jwtKey"));
 const authDao_1 = require("../dao/authDao");
-const mascotasDao_1 = require("../dao/mascotasDao");
 const utils_1 = require("../utils/utils");
 class AuthController {
     /**
@@ -26,19 +25,20 @@ class AuthController {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { username, password, nombre, apellidos } = req.body;
-            console.log(username, password);
+            // console.log(username, password);
             if (username == null || password == null) {
                 return res.status(400).json({ message: "Usuario y contraseña  incorrecta" });
             }
             const users = yield authDao_1.dao.getUser(username);
-            const mascotas = yield mascotasDao_1.daoMascotas.listaByUsuario(username);
-            if (mascotas.length <= 0) {
-                return res.status(400).json({ message: "Usted no tiene mascotas en adopcion favor de comunicarse con la sucursal" });
-            }
+            // const mascotas = await daoMascotas.listaByUsuario(username);
+            // if(mascotas.length <= 0) {
+            //     return res.status(400).json({ message: "Usted no tiene mascotas en adopcion favor de comunicarse con la sucursal" });
+            // }
             // Verificar si existe el usuario
             if (users.length <= 0) {
                 return res.status(400).json({ message: "El usuario no existe" });
             }
+            console.log(users);
             for (let user of users) {
                 if (yield utils_1.utils.checkPassword(password, user.password)) {
                     const token = jsonwebtoken_1.default.sign({ cveUsuario: user.cveUsuario, username }, jwtKey_1.default.jwtSecret, { expiresIn: '1h' });

@@ -13,22 +13,25 @@ class AuthController {
     */
     public async login(req: Request, res: Response) {
         const { username, password, nombre, apellidos } = req.body;
-        console.log(username, password);
+        // console.log(username, password);
         if (username == null || password == null) {
             return res.status(400).json({ message: "Usuario y contraseña  incorrecta" });
         }
 
         const users = await dao.getUser(username);
-        const mascotas = await daoMascotas.listaByUsuario(username);
+        // const mascotas = await daoMascotas.listaByUsuario(username);
 
-        if(mascotas.length <= 0) {
-            return res.status(400).json({ message: "Usted no tiene mascotas en adopcion favor de comunicarse con la sucursal" });
-        }
+        // if(mascotas.length <= 0) {
+        //     return res.status(400).json({ message: "Usted no tiene mascotas en adopcion favor de comunicarse con la sucursal" });
+        // }
 
         // Verificar si existe el usuario
         if (users.length <= 0) {
             return res.status(400).json({ message: "El usuario no existe" });
         }
+
+        console.log(users);
+        
 
         for(let user of users) {
             if(await utils.checkPassword(password, user.password)){
