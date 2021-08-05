@@ -18,7 +18,7 @@ class MascotaDao {
     listaByUsuario(username) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield database_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
-                return yield connection.query("SELECT cveUsuario, nombre, apellidos, username, cveMascota, nombreMascota, raza, idRaza, nomRaza, descripcion  FROM usuario JOIN mascota ON usuario.cveUsuario = mascota.cvePropietario JOIN razas ON mascota.raza = razas.idRaza WHERE usuario.username = ?", [username]);
+                return yield connection.query("SELECT cveUsuario, nombre, apellidos, username, cveMascota, nombreMascota, fechaAdopcion, raza, idRaza, nomRaza, descripcion  FROM usuario JOIN mascota ON usuario.cveUsuario = mascota.cvePropietario JOIN razas ON mascota.raza = razas.idRaza WHERE usuario.username = ?", [username]);
             }));
             return result;
         });
