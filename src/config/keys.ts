@@ -1,9 +1,9 @@
 export default{
     database: {
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        password: '',
-        database: 'mascotas'
+            host: 'db-mysql-nyc3-73664-do-user-9630400-0.b.db.ondigitalocean.com',
+            port: 25060,
+            user: 'admin',
+            password: 'sigcmbtrfrpmhusx',
+            database: 'mascotas'
     }
 }

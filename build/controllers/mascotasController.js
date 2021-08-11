@@ -53,10 +53,10 @@ class MascotasController {
                 };
                 const result = yield mascotasDao_1.daoMascotas.insert(mascota);
                 if (result.affectedRows > 0) {
-                    return res.json({ meesage: "Registro exitoso" });
+                    return res.json({ message: "Registro exitoso" });
                 }
                 else {
-                    return res.status(400).json({ meesage: result.message });
+                    return res.status(400).json({ message: result.message });
                 }
             }
             catch (ex) {
@@ -69,14 +69,14 @@ class MascotasController {
             try {
                 const mascota = req.body;
                 if (mascota.cveMascota == null) {
-                    return res.status(400).json({ meesage: "No se puede actualizar" });
+                    return res.status(400).json({ message: "No se puede actualizar" });
                 }
                 const result = yield mascotasDao_1.daoMascotas.update(mascota);
                 if (result.affectedRows > 0) {
-                    return res.json({ meesage: "Actualizado correctamente" });
+                    return res.json({ message: "Actualizado correctamente" });
                 }
                 else {
-                    return res.status(400).json({ meesage: result.message });
+                    return res.status(400).json({ message: result.message });
                 }
             }
             catch (ex) {
